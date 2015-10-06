@@ -573,9 +573,9 @@
             if (this.timePicker) {
                 var hour, minute, second;
                 if (this.endDate) {
-                    hour = parseInt(this.container.find('.left .hourselect').val(), 10);
-                    minute = parseInt(this.container.find('.left .minuteselect').val(), 10);
-                    second = this.timePickerSeconds ? parseInt(this.container.find('.left .secondselect').val(), 10) : 0;
+                    hour = this.parseIntOrSetZero(this.container.find('.left .hourselect').val());
+                    minute = this.parseIntOrSetZero(this.container.find('.left .minuteselect').val());
+                    second = this.timePickerSeconds ? this.parseIntOrSetZero(this.container.find('.left .secondselect').val()) : 0;
                     if (!this.timePicker24Hour) {
                         var ampm = this.container.find('.left .ampmselect').val();
                         if (ampm === 'PM' && hour < 12)
@@ -586,7 +586,7 @@
                 } else {
                     hour = parseInt(this.container.find('.right .hourselect').val(), 10);
                     minute = parseInt(this.container.find('.right .minuteselect').val(), 10);
-                    second = this.timePickerSeconds ? parseInt(this.container.find('.right .secondselect').val(), 10) : 0;
+                    second = this.timePickerSeconds ? parseIntOrSetZero(this.container.find('.right .secondselect').val()) : 0;
                     if (!this.timePicker24Hour) {
                         var ampm = this.container.find('.left .ampmselect').val();
                         if (ampm === 'PM' && hour < 12)
