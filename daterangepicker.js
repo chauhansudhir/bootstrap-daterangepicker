@@ -547,7 +547,7 @@
                 } else {
                     this.rightCalendar.month = this.startDate.clone().date(2).add(1, 'month');
                 }
-                
+
             } else {
                 if (this.leftCalendar.month.format('YYYY-MM') != this.startDate.format('YYYY-MM') && this.rightCalendar.month.format('YYYY-MM') != this.startDate.format('YYYY-MM')) {
                     this.leftCalendar.month = this.startDate.clone().date(2);
@@ -555,7 +555,19 @@
                 }
             }
         },
-
+        // try to parse int string to int or in case of undefined set 0 which is equal to 0hours
+        parseIntOrSetZero: function(val) {
+          if(typeof val == 'undefined' || typeof val == "null") {
+            console.debug("Trying to set value to 0");
+            val = 0;
+          }
+          val = parseInt(val, 10);
+          if(isNaN(val)) {
+            console.debug("Parseint failed to pass a value setting it 0");
+            val = 0;
+          }
+          return val;
+        },
         updateCalendars: function() {
 
             if (this.timePicker) {
@@ -1145,7 +1157,7 @@
                 this.container.find('input[name=daterangepicker_start]').val(dates[0].format(this.locale.format));
                 this.container.find('input[name=daterangepicker_end]').val(dates[1].format(this.locale.format));
             }
-            
+
         },
 
         clickRange: function(e) {
